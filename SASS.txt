@@ -1,0 +1,95 @@
+Primeiro instalar com node
+no terminal do vs code, use o código
+
+npm install -g sass
+
+depois rode o cóodigo
+
+sass version e se aparecer a versão é pq instalou 
+
+baixe a extensão SASS pra te auxiliar na produção 
+
+no html, chame o css dessa forma
+css/style.css, pois será gerada automaticamente
+
+crie uma página com o nome sass, dentro crie um arquivo style.sass
+
+porém o navegador não lê arquivos sass, por isso precisa 'transfomar' o sass em css, então no terminal, utilize o código
+
+sass --watch sass/style.sass:css/style.css
+
+Utilizando variáveis no sass
+
+podemos também usar no CSS normal, porém com limitações, no sass é mais abrangente.
+Pra utilizar variáveis:
+
+$primary-color: #fff
+
+e pra utilizar em algum elemento:
+
+div
+      background: $primary-color
+
+Pode também guardar outros dados, no projeto iremos guardar a largura do container
+
+$container-width: 1170px
+
+Iremos aprender a importar variáveis de outro arquivo sass, então crie outro arquivo '_variables.sass'
+
+crie todas variáveis lá, agr no arquivo style.sass
+importe as variáveis utilizando 
+@use 'variables' 
+
+agora todas as variáveis estão organizadas em outro arquivo, sem poluir 
+
+porém para usar coloque o nome do arquivo antes da variável, Ex:
+
+h2
+     color: variables.$primary-color
+
+Podemos tambémm utilizar Mixins para determinar larguras e deixar tudo organizado 
+
+criamos um arquivo sass com o nome de mixins
+
+dentro do arquivo, criamos o mixin utilizando @, ex:
+
+@mixin container (Pode ser qualquer nome)
+
+determinamos as larguras 
+
+@mixin container
+    max-width: 1170px
+    padding: 1.5rem 0
+    margin: 0 auto
+
+Agora pra usarmos no arquivo style
+utilizaremos 
+
+@include mixins.container
+
+No SASS, podemos estilizar os elementos filhos dessa forma, pegando pelo nome,ex
+
+uma div que tem outra dentro, setamos as ids como 
+
+<div id="pai"> 
+    <div id="pai-filho"><div/>
+</div>.
+
+No sass, pode chamar dessa forma
+
+#pai
+    background: $bg-color
+
+    &-filho
+        color: $text-color
+
+Podemos setar uma imagem diferente para cada div, usando parâmetros nos mixins, ex
+
+@mixin bg-img($img)
+    background-image: url('../img/#{$img}')
+
+agora na div onde vc quer a imagem, use o código;
+
+div 
+   @include mixins.bg-img('animas.jpg')
+
